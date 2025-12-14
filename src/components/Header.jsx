@@ -6,11 +6,18 @@ import IconMoon from "../assets/images/icon-moon.svg";
 
 
 const Header = () => {
-  const [isDark, setIsDark] = useState(false);
+
+  const savedTheme = localStorage.getItem('dark')
+  if (JSON.parse(savedTheme)){
+    document.documentElement.classList.add("dark");
+  }
+
+  const [isDark, setIsDark] = useState(JSON.parse(savedTheme));
 
   const HandleClick = () => {
     const isDarkChanged = document.documentElement.classList.toggle("dark");
     setIsDark(isDarkChanged);
+    localStorage.setItem('dark',isDarkChanged)
   };
 
   return (
